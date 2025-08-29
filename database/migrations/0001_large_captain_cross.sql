@@ -1,0 +1,1 @@
+ALTER TABLE "bot_status" DROP COLUMN "bot_info";
