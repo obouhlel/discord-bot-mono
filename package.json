@@ -1,0 +1,26 @@
+{
+  "name": "discord-bot",
+  "private": true,
+  "workspaces": [
+    "bot",
+    "web",
+    "database"
+  ],
+  "scripts": {
+    "dev": "bun run dev:bot & bun run dev:web",
+    "dev:bot": "bun run ./bot/index.ts --hot",
+    "dev:web": "cd web; bun run dev",
+    "bot:update": "bun run ./bot/scripts/update.ts",
+    "db:generate": "cd database; bun run generate",
+    "db:migrate": "cd database; bun run migrate",
+    "db:push": "cd database; bun run push",
+    "db:studio": "cd database; bun run studio",
+    "db:seed": "cd database; bun run seed",
+    "build": "bun run build:database && bun run build:bot && bun run build:web",
+    "build:database": "cd database; bun run build",
+    "build:bot": "cd bot; bun run build",
+    "build:web": "cd web; bun run build",
+    "clean": "rm -rf dist",
+    "clean:all": "rm -rf dist node_modules"
+  }
+}
