@@ -23,4 +23,4 @@ async function update() {
   }
 }
 
-update().catch(console.error)
+update().catch(console.error);

@@ -1,6 +1,7 @@
 {
   "name": "discord-bot",
   "private": true,
+  "type": "module",
   "workspaces": [
     "bot",
     "web",
@@ -21,6 +22,25 @@
     "build:bot": "cd bot; bun run build",
     "build:web": "cd web; bun run build",
     "clean": "rm -rf dist",
-    "clean:all": "rm -rf dist node_modules"
+    "clean:all": "rm -rf dist node_modules",
+    "typecheck": "bun run typecheck:bot && bun run typecheck:web && bun run typecheck:database",
+    "typecheck:bot": "cd bot; tsc --noEmit",
+    "typecheck:web": "cd web; tsc --noEmit",
+    "typecheck:database": "cd database; tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.34.0",
+    "eslint": "^9.34.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.41.0"
   }
 }
