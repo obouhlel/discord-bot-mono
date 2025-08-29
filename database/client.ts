@@ -1,8 +1,11 @@
 import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
-import * as schema from "./schemas";
 
-const queryClient = postgres(Bun.env.DATABASE_URL);
-export const db = drizzle(queryClient, { schema });
+// You can specify any property from the postgres-js connection options
+export const db = drizzle({
+  connection: {
+    url: Bun.env.DATABASE_URL,
+    ssl: Bun.env.NODE_ENV === "production",
+  },
+});
 
 export type Database = typeof db;

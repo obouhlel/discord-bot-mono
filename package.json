@@ -4,18 +4,17 @@
   "type": "module",
   "workspaces": [
     "bot",
-    "web",
-    "database"
+    "web"
   ],
   "scripts": {
     "dev": "bun run dev:bot & bun run dev:web",
     "dev:bot": "bun run ./bot/index.ts --hot",
-    "dev:web": "cd web; bun run dev",
+    "dev:web": "cd web; bun --env-file=../.env run dev",
     "bot:update": "bun run ./bot/scripts/update.ts",
-    "db:generate": "cd database; bun run generate",
-    "db:migrate": "cd database; bun run migrate",
-    "db:push": "cd database; bun run push",
-    "db:studio": "cd database; bun run studio",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
     "db:seed": "cd database; bun run seed",
     "build": "bun run build:database && bun run build:bot && bun run build:web",
     "build:database": "cd database; bun run build",
@@ -35,6 +34,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.34.0",
+    "@types/pg": "^8.15.5",
+    "drizzle-kit": "^0.31.4",
     "eslint": "^9.34.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
@@ -42,5 +43,9 @@
     "prettier": "^3.6.2",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.41.0"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.44.5",
+    "postgres": "^3.4.7"
   }
 }
