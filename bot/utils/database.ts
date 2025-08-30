@@ -1,4 +1,4 @@
-import { db } from "@database/index";
+import { db } from "../../database";
 import { sql } from "drizzle-orm";
 import type { DatabaseStatusResponse } from "@shared/types/api";
 
