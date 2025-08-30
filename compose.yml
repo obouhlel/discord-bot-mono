@@ -49,9 +49,9 @@ services:
     networks:
       - discord-bot
     depends_on:
-      discord-bot-database:
+      postgres:
         condition: service_healthy
-      discord-bot-redis:
+      redis:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/api/status/health"]
@@ -71,9 +71,9 @@ services:
     networks:
       - discord-bot
     depends_on:
-      discord-bot-database:
+      postgres:
         condition: service_healthy
-      discord-bot-redis:
+      redis:
         condition: service_healthy
     restart: unless-stopped
 
