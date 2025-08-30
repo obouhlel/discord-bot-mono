@@ -26,11 +26,6 @@ export function createRoutes(client: Client): Route[] {
       handler: botController.getStatus,
     },
     {
-      method: "POST",
-      path: "/deploy",
-      handler: botController.deployCommands,
-    },
-    {
       method: "GET",
       path: "/health",
       handler: healthController.checkHealth,

@@ -1,6 +1,6 @@
 import type { ApiRequest, ApiResponse } from "../types";
-import type { BotService } from "../services/bot.service";
-import { getCommandRegistry } from "@commands/commands";
+import type { BotService } from "@bot/api/services/bot.service";
+import { getCommandRegistry } from "@bot/commands";
 
 export class BotController {
   constructor(private botService: BotService) {}
@@ -12,16 +12,6 @@ export class BotController {
     } catch (error) {
       console.error("[Controller] Error getting status:", error);
       return res.error("Failed to get bot status", 500);
-    }
-  };
-
-  deployCommands = async (_req: ApiRequest, res: ApiResponse) => {
-    try {
-      const result = await this.botService.deployCommands();
-      return res.json(result);
-    } catch (error) {
-      console.error("[Controller] Error deploying commands:", error);
-      return res.error("Failed to deploy commands", 500);
     }
   };
 
