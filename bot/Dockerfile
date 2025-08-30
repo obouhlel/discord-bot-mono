@@ -10,4 +10,6 @@ WORKDIR /app/bot
 
 RUN bun install
 
+EXPOSE 3333
+
 ENTRYPOINT [ "bun", "run", "index.ts" ]
