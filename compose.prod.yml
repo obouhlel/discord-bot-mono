@@ -1,0 +1,67 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    container_name: web
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+    networks:
+      - coolify
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/status/database"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    labels:
+      # Activation de Traefik pour ce service
+      - "traefik.enable=true"
+
+      # Configuration du routeur HTTPS
+      - "traefik.http.routers.web.rule=Host(`suo.oustopie.xyz`)"
+      - "traefik.http.routers.web.entrypoints=websecure"
+      - "traefik.http.routers.web.tls=true"
+      - "traefik.http.routers.web.tls.certresolver=letsencrypt"
+
+      # Configuration du service
+      - "traefik.http.services.web.loadbalancer.server.port=3000"
+
+      # Redirection HTTP vers HTTPS
+      - "traefik.http.routers.web-http.rule=Host(`suo.oustopie.xyz`)"
+      - "traefik.http.routers.web-http.entrypoints=web"
+      - "traefik.http.routers.web-http.middlewares=redirect-to-https"
+
+      # Middleware pour la redirection HTTPS
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: bot/Dockerfile
+    container_name: app
+    ports:
+      - "3333:3333"
+    environment:
+      - NODE_ENV=production
+      - DISCORD_CLIENT_ID=${DISCORD_CLIENT_ID}
+      - DISCORD_SECRET_CLIENT=${DISCORD_SECRET_CLIENT}
+      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN}
+      - DATABASE_URL=${DATABASE_URL}
+    networks:
+      - coolify
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3333/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    restart: unless-stopped
+
+networks:
+  coolify:
+    external: true
+    name: coolify
