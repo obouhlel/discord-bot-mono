@@ -1,4 +1,5 @@
 import { drizzle } from "drizzle-orm/postgres-js";
+import { sql } from "drizzle-orm";
 import postgres from "postgres";
 
 if (!Bun.env.DATABASE_URL) {
@@ -9,7 +10,7 @@ const queryClient = postgres(Bun.env.DATABASE_URL);
 export const db = drizzle({ client: queryClient });
 
 try {
-  await db.execute("SELECT 1 as health_check");
+  await db.execute(sql`SELECT 1 as health_check`);
 } catch (error) {
   console.error("Failed to connect to database");
   console.error(error);
