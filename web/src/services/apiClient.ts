@@ -1,9 +1,4 @@
-import type {
-  DatabaseStatusResponse,
-  BotStatusResponse,
-  HealthResponse,
-  HelloResponse,
-} from "../api";
+import type { DatabaseStatusResponse, HelloResponse } from "../api";
 
 class ApiClient {
   private baseUrl: string;
@@ -45,14 +40,6 @@ class ApiClient {
   // Status endpoints
   async getDatabaseStatus(): Promise<DatabaseStatusResponse> {
     return this.request<DatabaseStatusResponse>("/api/status/database");
-  }
-
-  async getBotStatus(): Promise<BotStatusResponse> {
-    return this.request<BotStatusResponse>("/api/status/bot");
-  }
-
-  async getHealthStatus(): Promise<HealthResponse> {
-    return this.request<HealthResponse>("/api/status/health");
   }
 }
 

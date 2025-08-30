@@ -1,10 +1,3 @@
-CREATE TABLE "bot_status" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"status" text NOT NULL,
-	"last_heartbeat" timestamp DEFAULT now() NOT NULL,
-	"bot_info" jsonb
-);
---> statement-breakpoint
 CREATE TABLE "guilds" (
 	"id" varchar(255) PRIMARY KEY NOT NULL,
 	"discord_id" varchar(255) NOT NULL,
