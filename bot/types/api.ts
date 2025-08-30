@@ -29,9 +29,5 @@ export interface SerializedCommandData {
   type?: number;
 }
 
-export interface DatabaseStatusResponse {
-  status: "online" | "offline";
-  responseTime?: string;
-  error?: string;
-  timestamp: string;
-}
+// Moved to @shared/types/api.ts
+export type { DatabaseStatusResponse } from "@shared/types/api";

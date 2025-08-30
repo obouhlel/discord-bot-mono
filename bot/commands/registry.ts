@@ -1,7 +1,7 @@
 import { Collection, type Client, type RESTPostAPIApplicationCommandsJSONBody } from "discord.js";
-import type { SlashCommand } from "../types/commands/slash.type";
-import type { MessageCommand } from "../types/commands/message.type";
-import type { CommandsAPIData, CommandStats, SerializedCommandData } from "../types/api";
+import type { SlashCommand } from "@bot-types/commands/slash.type";
+import type { MessageCommand } from "@bot-types/commands/message.type";
+import type { CommandsAPIData, CommandStats, SerializedCommandData } from "@bot-types/api";
 
 export class CommandRegistry {
   private slashCommands: Collection<string, SlashCommand>;

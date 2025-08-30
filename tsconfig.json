@@ -18,8 +18,20 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false,
-    "types": ["bun-types"]
+    "types": ["bun-types"],
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["./shared/*"],
+      "@database/*": ["./database/*"]
+    }
   },
-  "include": ["env.d.ts", "bot/**/*.ts", "web/**/*.ts", "web/**/*.tsx", "database/**/*.ts"],
+  "include": [
+    "env.d.ts",
+    "bot/**/*.ts",
+    "web/**/*.ts",
+    "web/**/*.tsx",
+    "database/**/*.ts",
+    "shared/**/*.ts"
+  ],
   "exclude": ["node_modules", "dist", "build"]
 }

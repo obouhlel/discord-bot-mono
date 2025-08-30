@@ -1,7 +1,7 @@
 import type { Client } from "discord.js";
-import { CommandRegistry } from "./registry";
-import PingCommand from "./message/ping";
-import { ping } from "./slash/ping";
+import { CommandRegistry } from "@commands/registry";
+import PingCommand from "@commands/message/ping";
+import { ping } from "@commands/slash/ping";
 
 // Create a singleton instance of the command registry
 let commandRegistry: CommandRegistry | null = null;

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     // Environment setup & latest features
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ESNext"],
     "target": "ESNext",
     "module": "Preserve",
     "moduleDetection": "force",
@@ -21,18 +21,25 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
 
-    "baseUrl": "..",
-    "paths": {
-      "@/*": ["./web/src/*"],
-      "@shared/*": ["./shared/*"],
-      "@database/*": ["./database/*"]
-    },
-
     // Some stricter flags (disabled by default)
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false
-  },
+    "noPropertyAccessFromIndexSignature": false,
 
-  "exclude": ["dist", "node_modules"]
+    // Type declarations
+    "types": ["bun-types"],
+
+    // Path mapping
+    "baseUrl": "..",
+    "paths": {
+      "@bot/*": ["./bot/*"],
+      "@api/*": ["./bot/api/*"],
+      "@commands/*": ["./bot/commands/*"],
+      "@bot-types/*": ["./bot/types/*"],
+      "@utils/*": ["./bot/utils/*"],
+      "@shared/*": ["./shared/*"],
+      "@database/*": ["./database/*"]
+    }
+  },
+  "include": ["**/*.ts", "../env.d.ts", "../shared/**/*.ts", "../bot/**/*.ts"]
 }

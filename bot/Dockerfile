@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY bot ./bot
 COPY database ./database
+COPY shared ./shared
 
 WORKDIR /app/bot
 

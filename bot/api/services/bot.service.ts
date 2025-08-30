@@ -1,6 +1,6 @@
 import type { Client } from "discord.js";
-import { getBotStatus } from "../../utils/bot-status";
-import { getCommandRegistry } from "../../commands/commands";
+import { getBotStatus } from "@utils/bot-status";
+import { getCommandRegistry } from "@commands/commands";
 
 export class BotService {
   constructor(private client: Client) {}

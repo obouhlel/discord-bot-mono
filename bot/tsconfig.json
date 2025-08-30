@@ -27,7 +27,19 @@
     "noPropertyAccessFromIndexSignature": false,
 
     // Type declarations
-    "types": ["bun-types"]
+    "types": ["bun-types"],
+
+    // Path mapping
+    "baseUrl": "..",
+    "paths": {
+      "@bot/*": ["./bot/*"],
+      "@api/*": ["./bot/api/*"],
+      "@commands/*": ["./bot/commands/*"],
+      "@bot-types/*": ["./bot/types/*"],
+      "@utils/*": ["./bot/utils/*"],
+      "@shared/*": ["./shared/*"],
+      "@database/*": ["./database/*"]
+    }
   },
-  "include": ["**/*.ts", "../env.d.ts"]
+  "include": ["**/*.ts", "../env.d.ts", "../shared/**/*.ts"]
 }

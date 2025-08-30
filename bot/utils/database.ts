@@ -1,6 +1,6 @@
-import { db } from "../../database";
+import { db } from "@database/index";
 import { sql } from "drizzle-orm";
-import type { DatabaseStatusResponse } from "../types/api";
+import type { DatabaseStatusResponse } from "@shared/types/api";
 
 export async function getPostgresStatus(): Promise<DatabaseStatusResponse> {
   try {

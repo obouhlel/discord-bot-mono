@@ -1,6 +1,6 @@
 import type { ApiRequest, ApiResponse } from "../types";
 import type { BotService } from "../services/bot.service";
-import { getCommandRegistry } from "../../commands/commands";
+import { getCommandRegistry } from "@commands/commands";
 
 export class BotController {
   constructor(private botService: BotService) {}

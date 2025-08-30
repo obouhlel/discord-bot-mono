@@ -1,5 +1,5 @@
 import type { Client } from "discord.js";
-import { getPostgresStatus } from "../../utils/database";
+import { getPostgresStatus } from "@utils/database";
 
 export class HealthService {
   constructor(private client: Client) {}
