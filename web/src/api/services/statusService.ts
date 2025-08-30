@@ -6,7 +6,7 @@ export class StatusService {
   static async checkDatabase(): Promise<DatabaseStatusResponse> {
     try {
       const start = Date.now();
-      await db.execute(sql`SELECT 1`);
+      await db.execute(sql`SELECT 1 as health_check`);
       const responseTime = Date.now() - start;
 
       return {
