@@ -5,7 +5,7 @@ import { MessageCommand } from "@bot-types/commands/message.type";
 export default class PingCommand extends MessageCommand {
   public readonly data = {
     name: "ping",
-    description: "Reply pong message if the message is ping",
+    description: "Replies with pong",
   };
 
   shouldExecute({ message }: MessageCommandContext): boolean {

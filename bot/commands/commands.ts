@@ -1,7 +1,9 @@
 import type { Client } from "discord.js";
 import { CommandRegistry } from "@commands/registry";
 import PingCommand from "@commands/message/ping";
+import HelpCommand from "@commands/message/help";
 import { ping } from "@commands/slash/ping";
+import { help } from "@commands/slash/help";
 
 // Create a singleton instance of the command registry
 let commandRegistry: CommandRegistry | null = null;
@@ -12,11 +14,11 @@ export function initializeCommands(client: Client): CommandRegistry {
     commandRegistry = new CommandRegistry(client);
 
     // Register all slash commands
-    const slashCommands = [ping];
+    const slashCommands = [help, ping];
     commandRegistry.registerSlashCommands(slashCommands);
 
     // Register all message commands
-    const messageCommands = [new PingCommand()];
+    const messageCommands = [new HelpCommand(), new PingCommand()];
     commandRegistry.registerMessageCommands(messageCommands);
 
     const stats = commandRegistry.getStats();
