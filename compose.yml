@@ -66,6 +66,8 @@ services:
       context: .
       dockerfile: bot/Dockerfile
     container_name: app
+    ports:
+      - "3333:3333"
     env_file:
       - .env
     networks:
