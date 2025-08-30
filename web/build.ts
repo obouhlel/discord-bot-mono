@@ -126,7 +126,7 @@ console.log("\n🚀 Starting build process...\n");
 const cliConfig = parseArgs();
 const outdir =
   (typeof cliConfig.outdir === "string" ? cliConfig.outdir : undefined) ||
-  path.join(process.cwd(), "../dist/web");
+  path.join(process.cwd(), "dist");
 
 if (existsSync(outdir)) {
   console.log(`🗑️ Cleaning previous build at ${outdir}`);
