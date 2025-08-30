@@ -36,8 +36,6 @@ services:
       timeout: 10s
       retries: 3
       start_period: 15s
-    labels:
-      - "traefik.http.services.app.loadbalancer.server.port=3333"
     restart: unless-stopped
 
 networks:
