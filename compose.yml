@@ -1,12 +1,17 @@
 services:
-  postgres:
+  discord-bot-database:
     image: postgres:17-alpine
+    container_name: discord-bot-database
     environment:
       POSTGRES_DB: discord
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - 5432:5432
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - discord-bot
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 30s
@@ -14,13 +19,68 @@ services:
       retries: 3
       start_period: 10s
 
-  redis:
+  discord-bot-redis:
     image: redis:7.2
+    container_name: discord-bot-redis
     ports:
-      - 6379:6379
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - discord-bot
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 10s
+
+  discord-bot-web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    container_name: discord-bot-web
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env
+    networks:
+      - discord-bot
+    depends_on:
+      discord-bot-database:
+        condition: service_healthy
+      discord-bot-redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/status/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    restart: unless-stopped
+
+  discord-bot-app:
+    build:
+      context: .
+      dockerfile: bot/Dockerfile
+    container_name: discord-bot-app
+    env_file:
+      - .env
+    networks:
+      - discord-bot
+    depends_on:
+      discord-bot-database:
+        condition: service_healthy
+      discord-bot-redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  discord-bot:
+    driver: bridge
