@@ -3,10 +3,6 @@
   "workspaces": {
     "": {
       "name": "discord-bot-monorepo",
-      "dependencies": {
-        "drizzle-orm": "^0.44.5",
-        "postgres": "^3.4.7",
-      },
       "devDependencies": {
         "@eslint/js": "^9.34.0",
         "@types/pg": "^8.15.5",
@@ -24,6 +20,8 @@
       "name": "@discord-bot/bot",
       "dependencies": {
         "discord.js": "^14.22.1",
+        "drizzle-orm": "^0.44.5",
+        "postgres": "^3.4.7",
       },
       "devDependencies": {
         "@types/bun": "latest",
@@ -37,6 +35,8 @@
       "version": "0.1.0",
       "dependencies": {
         "bun-plugin-tailwind": "^0.0.15",
+        "drizzle-orm": "^0.44.5",
+        "postgres": "^3.4.7",
         "react": "^19",
         "react-dom": "^19",
         "tailwindcss": "^4.1.11",
