@@ -1,7 +1,7 @@
 import js from "@eslint/js";
 import tseslint from "typescript-eslint";
-import reactPlugin from "eslint-plugin-react";
-import reactHooksPlugin from "eslint-plugin-react-hooks";
+import svelte from "eslint-plugin-svelte";
+import svelteParser from "svelte-eslint-parser";
 
 export default tseslint.config(
   js.configs.recommended,
@@ -13,8 +13,8 @@ export default tseslint.config(
       "**/node_modules/**",
       "**/*.min.js",
       "**/coverage/**",
-      "**/.next/**",
       "**/migrations/**",
+      "**/.svelte-kit/**",
     ],
   },
   {
@@ -23,6 +23,12 @@ export default tseslint.config(
       ecmaVersion: "latest",
       sourceType: "module",
       parser: tseslint.parser,
+      globals: {
+        window: "readonly",
+        console: "readonly",
+        setInterval: "readonly",
+        clearInterval: "readonly",
+      },
     },
     rules: {
       "@typescript-eslint/no-unused-vars": [
@@ -41,29 +47,27 @@ export default tseslint.config(
       ],
     },
   },
+  // Svelte configuration
+  ...svelte.configs["flat/recommended"],
   {
-    files: ["web/**/*.tsx", "web/**/*.ts"],
-    plugins: {
-      react: reactPlugin,
-      "react-hooks": reactHooksPlugin,
-    },
+    files: ["**/*.svelte"],
     languageOptions: {
+      parser: svelteParser,
       parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
+        parser: tseslint.parser,
+        extraFileExtensions: [".svelte"],
       },
-    },
-    settings: {
-      react: {
-        version: "detect",
+      globals: {
+        window: "readonly",
+        console: "readonly",
+        setInterval: "readonly",
+        clearInterval: "readonly",
       },
     },
     rules: {
-      ...reactPlugin.configs.recommended.rules,
-      ...reactHooksPlugin.configs.recommended.rules,
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off",
+      // Add any custom Svelte rules here
+      "svelte/no-at-html-tags": "error",
+      "svelte/valid-compile": "error",
     },
   }
 );
