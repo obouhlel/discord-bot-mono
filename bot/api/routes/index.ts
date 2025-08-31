@@ -1,9 +1,9 @@
 import type { Client } from "discord.js";
-import type { Route } from "../types";
-import { BotController } from "../controllers/bot.controller";
-import { HealthController } from "../controllers/health.controller";
-import { BotService } from "../services/bot.service";
-import { HealthService } from "../services/health.service";
+import type { Route } from "@bot/api/types";
+import { BotController } from "@bot/api/controllers/bot.controller";
+import { HealthController } from "@bot/api/controllers/health.controller";
+import { BotService } from "@bot/api/services/bot.service";
+import { HealthService } from "@bot/api/services/health.service";
 
 export function createRoutes(client: Client): Route[] {
   // Initialize services

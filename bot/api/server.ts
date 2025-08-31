@@ -1,8 +1,8 @@
 import type { Client } from "discord.js";
-import { createRoutes } from "./routes";
-import { handleCors } from "./middleware/cors";
-import { createResponseHelper } from "./middleware/response";
-import type { ApiRequest } from "./types";
+import { createRoutes } from "@bot/api/routes";
+import { handleCors } from "@bot/api/middleware/cors";
+import { createResponseHelper } from "@bot/api/middleware/response";
+import type { ApiRequest } from "@bot/api/types";
 
 export function createApiServer(client: Client) {
   const routes = createRoutes(client);
@@ -23,23 +23,25 @@ export function createApiServer(client: Client) {
 
       console.info(`[API] ${request.method} ${url.pathname}`);
 
+      const origin = request.headers.get("origin");
+
       // Find matching route
       const route = routes.find((r) => r.method === request.method && r.path === url.pathname);
 
       if (!route) {
         console.warn(`[API] Route not found: ${request.method} ${url.pathname}`);
-        const res = createResponseHelper();
+        const res = createResponseHelper(origin);
         return res.error("Endpoint not found", 404);
       }
 
       try {
         const req: ApiRequest = { request };
-        const res = createResponseHelper();
+        const res = createResponseHelper(origin);
 
         return await route.handler(req, res);
       } catch (error) {
         console.error("[API] Request handler error:", error);
-        const res = createResponseHelper();
+        const res = createResponseHelper(origin);
         return res.error("Internal server error", 500);
       }
     },

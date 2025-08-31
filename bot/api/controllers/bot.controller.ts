@@ -1,4 +1,4 @@
-import type { ApiRequest, ApiResponse } from "../types";
+import type { ApiRequest, ApiResponse } from "@bot/api/types";
 import type { BotService } from "@bot/api/services/bot.service";
 import { getCommandRegistry } from "@bot/commands";
 

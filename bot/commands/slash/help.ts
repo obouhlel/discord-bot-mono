@@ -5,7 +5,7 @@ import {
   EmbedBuilder,
 } from "discord.js";
 import type { ChatInputCommandInteraction } from "discord.js";
-import { getCommandRegistry } from "../commands";
+import { getCommandRegistry } from "@bot/commands";
 
 export const help = {
   data: new SlashCommandBuilder()

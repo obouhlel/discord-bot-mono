@@ -1,12 +1,14 @@
-import { corsHeaders } from "./cors";
-import type { ApiResponse } from "../types";
+import { getCorsHeaders } from "@bot/api/middleware/cors";
+import type { ApiResponse } from "@bot/api/types";
 
-export function createResponseHelper(): ApiResponse {
+export function createResponseHelper(origin?: string | null): ApiResponse {
+  const headers = getCorsHeaders(origin ?? null);
+
   return {
     json: (data: unknown, status = 200) => {
       return new Response(JSON.stringify(data), {
         status,
-        headers: corsHeaders,
+        headers,
       });
     },
     error: (message: string, status = 500) => {
@@ -17,7 +19,7 @@ export function createResponseHelper(): ApiResponse {
         }),
         {
           status,
-          headers: corsHeaders,
+          headers,
         }
       );
     },

@@ -1,7 +1,7 @@
 import { EmbedBuilder, type TextChannel } from "discord.js";
 import type { MessageCommandContext } from "@bot-types/commands/message.type";
 import { MessageCommand } from "@bot-types/commands/message.type";
-import { getCommandRegistry } from "../commands";
+import { getCommandRegistry } from "@bot/commands";
 
 export default class HelpCommand extends MessageCommand {
   public readonly data = {

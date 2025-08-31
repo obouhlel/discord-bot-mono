@@ -1,5 +1,5 @@
-import type { ApiRequest, ApiResponse } from "../types";
-import type { HealthService } from "../services/health.service";
+import type { ApiRequest, ApiResponse } from "@bot/api/types";
+import type { HealthService } from "@bot/api/services/health.service";
 
 export class HealthController {
   constructor(private healthService: HealthService) {}
@@ -20,7 +20,6 @@ export class HealthController {
       version: "1.0.0",
       endpoints: [
         "GET /status - Bot status",
-        "POST /deploy - Deploy slash commands",
         "GET /health - Health check",
         "GET /guilds - List all guilds",
         "GET /commands - List all commands",

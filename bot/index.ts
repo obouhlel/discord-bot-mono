@@ -1,6 +1,6 @@
 import { Client, Events, GatewayIntentBits, Partials } from "discord.js";
-import { createApiServer } from "@api/server";
-import { initializeCommands } from "@commands/commands";
+import { createApiServer } from "@bot/api/server";
+import { initializeCommands } from "@bot/commands";
 
 // Initialize Discord client
 const client = new Client({

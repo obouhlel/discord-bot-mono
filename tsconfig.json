@@ -21,8 +21,10 @@
     "types": ["bun-types"],
     "baseUrl": ".",
     "paths": {
+      "@bot/*": ["./bot/*"],
       "@shared/*": ["./shared/*"],
-      "@database/*": ["./database/*"]
+      "@database/*": ["./database/*"],
+      "@web/*": ["./web/*"]
     }
   },
   "include": [
